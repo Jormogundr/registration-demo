@@ -3,28 +3,27 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="description" content="A game called fifteen puzzle.">
+    <meta name="description" content="An interface for submitting term project registrations for demos.">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="keywords" content="fifteen puzzle game wow very cool">
+    <meta name="keywords" content="CIS525 web technologies university of michigan dearborn term project">
 
-    <title>Fifteen Puzzle - Game</title>
+    <title>Demonstration Form </title>
     <link rel="shortcut icon" href="img/favicon.png">
     <link rel="stylesheet" href="styles/index.css">
 
     <noscript> <h2>To get the most from this website, please enable JavaScript
         in your browser.</h2> </noscript>
-    <script src="script/game.js"></script>
-    <script src="script/confetti.js"></script>
   </head>
   <body>
     <header>
-      <h1 id="title">Fifteen Puzzle</h1>
+      <h1 id="title">CIS525 Demonstration Reservation</h1>
     </header>
     <main>
-      <form id="registration_form">
+      <h1>Book a time for your term project demonstration</h1>
+      <form id="registration_form" method="POST" action="submit_form.php">
         <span>
           <label for="umid"><b>UMID</b></label>
-          <input type="number"
+          <input type="text"
             placeholder="Enter UMID number" name="umid"
             required>
         </span>
@@ -33,13 +32,6 @@
           <label for="first_name"><b>First name</b></label>
           <input type="text" placeholder="Enter your first name"
             name="first_name"
-            required>
-        </span>
-
-        <span>
-          <label for="last_name"><b>Last name</b></label>
-          <input type="text" placeholder="Enter your last name"
-            name="last_name"
             required>
         </span>
 
@@ -79,6 +71,13 @@
             <option value="6">12/6/23, 8:00 PM – 9:00 PM</option>
           </select>
         </span>
+
+        <span>
+          <label for="submit"><b>&nbsp</b></label>
+          <input type="submit" value="Submit">
+        </span>
+
+
       </form>
     </main>
 
