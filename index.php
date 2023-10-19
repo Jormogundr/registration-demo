@@ -1,6 +1,6 @@
 <?php
 
-require 'database.php';
+require('database.php');
 
 
 // get the data from the form 
@@ -51,6 +51,10 @@ if (!preg_match ("^[2-9]\d{2}-\d{3}-\d{4}$", $phone_number) ){
 foreach ($errors as $error) {
   $errmsg .= '• ' . $error . '<br />';
 }
+
+
+// database operations
+
 
 ?>
 
