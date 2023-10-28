@@ -1,12 +1,13 @@
 <?php
 
 // Define PHP DB object as needed
-$dsn = 'mysql:host=localhost;dbname=students';
+$dsn = 'mysql:host=localhost;dbname=registration';
 $username = 'admin';
 $password = 'admin';
 
 try {
     $db = new PDO($dsn, $username, $password);
+    $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     $error_message = $e->getMessage();
     echo "<p>An error occurred while connecting to
