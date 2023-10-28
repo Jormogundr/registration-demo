@@ -10,12 +10,6 @@ main {
   border: #000000 1px;
 }
 
-table,
-th,
-td {
-
-  padding: 36px;
-}
 
 /* ID Selectors */
 #title {
@@ -50,9 +44,6 @@ a:focus {
   color: rgb(104, 15, 112);
 }
 
-img {
-  margin: 1%;
-}
 
 header {
   border-bottom: 1px solid black;
@@ -62,74 +53,10 @@ header h1 {
   margin-left: 3.125%;
 }
 
-.column {
-  width: 50%;
+.error {
+  border: 2px solid red;
+  border-radius: 4px;
 }
-
-/* The navigation menu */
-.navbar {
-  margin-top: 1%;
-  overflow: hidden;
-  background-color: #333;
-}
-
-/* Navigation links */
-.navbar a {
-  float: left;
-  font-size: 1.5em;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* The subnavigation menu */
-.subnav {
-  float: left;
-  overflow: hidden;
-}
-
-/* Subnav button */
-.subnav .subnavbtn {
-  font-size: 1.5em;
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-}
-
-/* Add a black background color to navigation links on hover */
-.navbar a:hover,
-.subnav:hover .subnavbtn {
-  background-color: black;
-}
-
-/* Style the subnav content - positioned absolute */
-.subnav-content {
-  display: none;
-  position: absolute;
-  background-color: black;
-}
-
-/* Style the subnav links */
-.subnav-content a {
-  color: white;
-  text-decoration: none;
-}
-
-/* Add a grey background color on hover */
-.subnav-content a:hover {
-  background-color: #eee;
-  color: black;
-}
-
-/* Navigation links */
-.subnav:hover .subnav-content {
-  display: block;
-}
-
 
 
 /* Media queries */
