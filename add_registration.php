@@ -1,6 +1,7 @@
 <?php
-require_once('database.php');
+require('database.php');
 
+// query database for possible existing umid 
 try {
     $query = "SELECT * FROM student_registrations WHERE umid = ?";
     $statement = $db->prepare($query);
@@ -8,20 +9,41 @@ try {
     $student = $statement->fetch(PDO::FETCH_ASSOC);
     $statement->closeCursor();
 } catch (PDOException $e) {
-    echo "DataBase Error: The user could not be added.<br>" . $e->getMessage();
+    echo "DataBase Error <br>" . $e->getMessage();
 } catch (Exception $e) {
-    echo "General Error: The user could not be added.<br>" . $e->getMessage();
+    echo "General Error<br>" . $e->getMessage();
 }
 
-// check if umid already exists in table, else INSERT it
-if ($student) {
-    echo 'Student registration matching provided UMID already exists in db';
+if ($student) {    
+    if ($overwrite == 'true') {
+        try {
+            $query = "REPLACE INTO student_registrations (umid, first_name, last_name, project_name, email_address, phone_number, seat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            $statement = $db->prepare($query);
+            $statement->execute([$umid, $first_name, $last_name, $project_name, $email_address, $phone_number, $seat]);
+            echo "Successfully replaced record.";
+        } catch (PDOException $e) {
+            echo "DataBase Error <br>" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "General Error <br>" . $e->getMessage();
+        }
+    }
+    else {$errmsg = "This record already exists and will not be overwritten unless you check the box.";}
+}
 
-    // ask user if they'd like to update their registration
-    echo "<script src='script/promptMoveRecord.js'></script>";
-} else {
-    $query = "INSERT INTO student_registrations (umid, first_name, last_name, project_name, email_address, phone_number, seat) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $statement = $db->prepare($query);
-    $statement->execute([$umid, $first_name, $last_name, $project_name, $email_address, $phone_number, $seat]);
-    echo "Successfully inserted new record.";
+// if it does not exist, add it 
+else {
+    try {
+        echo "Inserting new record";
+        $query = "INSERT INTO student_registrations (umid, first_name, last_name, project_name, email_address, phone_number, seat) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $statement = $db->prepare($query);
+        $statement->execute([$umid, $first_name, $last_name, $project_name, $email_address, $phone_number, $seat]);
+        echo "Successfully inserted new record.";
+    } catch (PDOException $e) {
+        echo "DataBase Error <br>" . $e->getMessage();
+    } catch (Exception $e) {
+        echo "General Error <br>" . $e->getMessage();
+    }
+
+    $_POST = array();
+    header("Location: index.php");
 }

@@ -1,9 +1,11 @@
 <?php
 
 // Define PHP DB object as needed
-$dsn = 'mysql:host=localhost;dbname=registration';
-$username = 'admin';
-$password = 'admin';
+// change localhost to aws rds endpoint when ready to deploy to elastic beanstalk
+// database-test1.cd9be3blyxm2.us-east-2.rds.amazonaws.com
+$dsn = 'mysql:host=zedp1d.stackhero-network.com;dbname=registration';
+$username = 'root';
+$password = 'jz5jHP7FdVtXw9Yr20bBgn6ptnZKj1S6';
 
 try {
     global $db;

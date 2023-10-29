@@ -1,6 +1,5 @@
 <?php
 require("form.php");
-$errmsg = '';
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +32,8 @@ $errmsg = '';
 
       <!-- Check if form is valid and if so proceed with database logic then setup page for next form submission -->
       <?php if ($isValidForm) : ?>
-        <p style="color: blue;"><b>Form is valid</b><br />
-          <?php require("add_registration.php") ?>
+        <!-- include php for inserting record -->
+        <?php require("add_registration.php") ?>
         </p>
       <?php endif; ?>
 
@@ -44,7 +43,7 @@ $errmsg = '';
           <?php echo $errmsg; ?>
         </p>
       <?php endif; ?>
-      
+
       <span>
         <button onclick="window.location.href='registrations.php';">
           View Registration Table
@@ -82,10 +81,10 @@ $errmsg = '';
       </span>
 
       <?php $seatsRemaining = getNumberOfSeats(); ?>
-      
 
-      <span class="<?php echo (empty($_POST['seat']) && isset($_POST['seat'])) ? 'error' : 'input' ?>">
-        <label for="seat"><b>Seat</b></label>
+
+      <span>
+        <label class="<?php echo (empty($_POST['seat']) && isset($_POST['seat'])) ? 'error' : 'input' ?>" for="seat"><b>Seat</b></label>
         <select name="seat" id="seat">
           <option value="1">12/5/23, 6:00 PM – 7:00 PM - Remaning <?php echo $seatsRemaining[0]; ?> seats</option>
           <option value="2">12/5/23, 7:00 PM – 8:00 PM - Remaning <?php echo $seatsRemaining[1]; ?> seats</option>
@@ -94,6 +93,12 @@ $errmsg = '';
           <option value="5">12/6/23, 7:00 PM – 8:00 PM - Remaning <?php echo $seatsRemaining[4]; ?> seats</option>
           <option value="6">12/6/23, 8:00 PM – 9:00 PM - Remaning <?php echo $seatsRemaining[5]; ?> seats</option>
         </select>
+      </span>
+
+      <span>
+        <input type="hidden" name="overwrite" value="false">
+        <input type="checkbox" name="overwrite" value="true" <?php echo ($overwrite == 'true') ? "checked" : '' ?>>
+        <label for="overwrite">Overwrite existing record</label><br>
       </span>
 
       <span>

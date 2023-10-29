@@ -1,6 +1,6 @@
 <?php
 
-
+require("database.php");
 $isValidForm = false;
 
 // get the data from the form 
@@ -49,8 +49,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // phone number 
-    elseif (!preg_match("/^[0-9]{10}$/", $phone_number)) {
-        $error_message = 'Invalid phone number';
+    elseif (!preg_match("/^[0-9]{3}-[0-9]{3}-[0-9]{4}$/", $phone_number)) {
+        $error_message = 'Invalid phone number, please use XXX-XXX-XXXX format.';
         array_push($errors, $error_message);
         $_POST['phone_number'] = '';
         $isValidForm = false;
@@ -63,8 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         array_push($errors, $error_message);
         $_POST['seat'] = '';
         $isValidForm = false;
-    }
-    else {
+    } else {
         $isValidForm = true;
     }
 
@@ -72,24 +71,39 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     foreach ($errors as $error) {
         $errmsg .= '• ' . $error . '<br />';
     }
+
+    global $overwrite;
+    if ($_POST['overwrite'] == 'true') {
+        $overwrite = "true";
+    }
+    else {
+        $overwrite = "false";
+    }
+
 }
 
 
 // Returns an array with an element for each seat available where values correspond to number of remaining free seats
 function getNumberOfSeats()
 {
-    require_once("database.php");
+    require("database.php");
     $seatsRemaining = array();
 
 
     for ($i = 1; $i < 7; $i++) {
-        $query = "SELECT COUNT(*) FROM student_registrations WHERE seat = ?";
-        $statement = $db->prepare($query);
-        $statement->execute([$i]);
-        $count = $statement->fetchColumn();
-        $statement->closeCursor();
-        $free = 6 - $count;
-        array_push($seatsRemaining, $free);
+        try {
+            $query = "SELECT COUNT(*) FROM student_registrations WHERE seat = ?";
+            $statement = $db->prepare($query);
+            $statement->execute([$i]);
+            $count = $statement->fetchColumn();
+            $statement->closeCursor();
+            $free = 6 - $count;
+            array_push($seatsRemaining, $free);
+        } catch (PDOException $e) {
+            echo "DataBase Error <br>" . $e->getMessage();
+        } catch (Exception $e) {
+            echo "General Error <br>" . $e->getMessage();
+        }
     }
     return $seatsRemaining;
 }

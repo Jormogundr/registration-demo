@@ -1,9 +1,10 @@
 <?php
 
-require_once("database.php");
+require("database.php");
 
 // given a seat index from the database, return the associated time slot string
-function seatToTimeslotString($idx) {
+function seatToTimeslotString($idx)
+{
     switch ($idx) {
         case 1:
             return "12/5/23, 6:00 PM – 7:00 PM";
@@ -17,15 +18,20 @@ function seatToTimeslotString($idx) {
             return "12/6/23, 7:00 PM – 8:00 PM";
         case 6:
             return "12/6/23, 8:00 PM – 9:00 PM";
-                
     }
 }
 
-$query = "SELECT * FROM student_registrations";
-$statement = $db->prepare($query);
-$statement->execute();
-$students = $statement->fetchAll(PDO::FETCH_ASSOC);
-$statement->closeCursor();
+try {
+    $query = "SELECT * FROM student_registrations";
+    $statement = $db->prepare($query);
+    $statement->execute();
+    $students = $statement->fetchAll(PDO::FETCH_ASSOC);
+    $statement->closeCursor();
+} catch (PDOException $e) {
+    echo "DataBase Error <br>" . $e->getMessage();
+} catch (Exception $e) {
+    echo "General Error <br>" . $e->getMessage();
+}
 
 ?>
 
@@ -65,7 +71,6 @@ $statement->closeCursor();
 
         <section>
             <!-- display a table of products -->
-            <h2><?php echo $category_name; ?></h2>
             <table id="registrations">
                 <tr>
                     <th>UMID</th>
