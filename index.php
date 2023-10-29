@@ -1,5 +1,6 @@
 <?php
-require("form.php")
+require("form.php");
+$errmsg = '';
 ?>
 
 <!DOCTYPE html>
@@ -30,26 +31,20 @@ require("form.php")
     <h1>Book a time for your term project demonstration</h1>
     <form id="registration_form" method="POST" action="index.php">
 
+      <!-- Check if form is valid and if so proceed with database logic then setup page for next form submission -->
+      <?php if ($isValidForm) : ?>
+        <p style="color: blue;"><b>Form is valid</b><br />
+          <?php require("add_registration.php") ?>
+        </p>
+      <?php endif; ?>
+
       <!--Print form errors -->
       <?php if ($errmsg != '') : ?>
         <p style="color: red;"><b>Please correct the following errors:</b><br />
           <?php echo $errmsg; ?>
         </p>
       <?php endif; ?>
-
-      <!-- Check if user is trying to resubmit their registration -->
-      <?php if ($isValidForm) : ?>
-        <?php if (isset($_COOKIE['formResubmission'])) :
-          if ($_COOKIE['formResubmission'] == "true") :
-            require_once("add_registration.php");
-            $_POST = array();
-        ?>
-            <p>Wow</p>
-          <?php endif; ?>
-        <?php endif; ?>
-      <?php endif; ?>
-
-
+      
       <span>
         <button onclick="window.location.href='registrations.php';">
           View Registration Table
@@ -87,8 +82,9 @@ require("form.php")
       </span>
 
       <?php $seatsRemaining = getNumberOfSeats(); ?>
+      
 
-      <span>
+      <span class="<?php echo (empty($_POST['seat']) && isset($_POST['seat'])) ? 'error' : 'input' ?>">
         <label for="seat"><b>Seat</b></label>
         <select name="seat" id="seat">
           <option value="1">12/5/23, 6:00 PM – 7:00 PM - Remaning <?php echo $seatsRemaining[0]; ?> seats</option>

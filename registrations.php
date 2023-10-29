@@ -27,12 +27,6 @@ $statement->execute();
 $students = $statement->fetchAll(PDO::FETCH_ASSOC);
 $statement->closeCursor();
 
-// convert timeslot index integer back into timeslot string
-$timeslots = array();
-foreach ($seats as $seat) {
-
-}
-
 ?>
 
 <!DOCTYPE html>

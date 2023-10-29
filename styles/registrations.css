@@ -23,3 +23,49 @@
     vertical-align: middle;
     height: 48px;
   }
+
+  /* Media queries */
+
+/* All wide screens*/
+@media screen and (min-width: 959px) and (max-width: 3840px) {
+  #no_pdf {
+    visibility: hidden;
+  }
+}
+
+/* tablet portrait layout (768px to 959px) */
+@media only screen and (max-width: 959px) {
+  body {
+    width: 95vw;
+    background-color: white;
+    margin: 15px auto;
+    outline: 0px solid #000000;
+    height: 95vh;
+  }
+
+  #no_pdf {
+    visibility: hidden;
+  }
+}
+
+/* mobile landscape layout (480px to 767px) */
+@media only screen and (max-width: 767px) {
+  body {
+    width: 95vw;
+    background-color: white;
+    margin: 15px auto;
+    outline: 0px solid #000000;
+    height: 95vh;
+  }
+}
+
+/* mobile portrait layout (479px or less) */
+@media only screen and (max-width: 479px) {
+  body {
+    width: 95vw;
+    background-color: white;
+    margin: 15px auto;
+    outline: 0px solid #000000;
+    height: 95vh;
+  }
+}

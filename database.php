@@ -6,6 +6,7 @@ $username = 'admin';
 $password = 'admin';
 
 try {
+    global $db;
     $db = new PDO($dsn, $username, $password);
     $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
