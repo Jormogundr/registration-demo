@@ -37,16 +37,24 @@ require("form.php")
         </p>
       <?php endif; ?>
 
-      <!-- Check if form is valid and if so proceed with database logic then setup page for next form submission -->
+      <!-- Check if user is trying to resubmit their registration -->
       <?php if ($isValidForm) : ?>
-        <p style="color: blue;"><b>Form is valid</b><br />
-          <?php
-          require_once("add_registration.php");
-          $_POST = array();
-          ?>
-        </p>
+        <?php if (isset($_COOKIE['formResubmission'])) :
+          if ($_COOKIE['formResubmission'] == "true") :
+            require_once("add_registration.php");
+            $_POST = array();
+        ?>
+            <p>Wow</p>
+          <?php endif; ?>
+        <?php endif; ?>
       <?php endif; ?>
 
+
+      <span>
+        <button onclick="window.location.href='registrations.php';">
+          View Registration Table
+        </button>
+      </span>
 
       <span>
         <label for="umid"><b>UMID</b></label>
@@ -96,6 +104,7 @@ require("form.php")
         <label for="submit"><b>&nbsp</b></label>
         <input type="submit" value="Submit">
       </span>
+
 
 
     </form>

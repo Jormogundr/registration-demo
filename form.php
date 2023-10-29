@@ -57,6 +57,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $isValidForm = true;
   }
 
+  // seat -- check there is a seat avaialble during the selected timeslot
+
   // append each error message to marked up object
   foreach ($errors as $error) {
     $errmsg .= '• ' . $error . '<br />';

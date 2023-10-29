@@ -1,0 +1,25 @@
+#registrations {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0.5em;
+    border: 2px solid black;
+    border-collapse: collapse; 
+    width: 90vw;
+  }
+  
+  #registrations tr {
+    border: 2px solid black;
+  }
+
+  #registrations th {
+    border: 2px solid black;
+    font-size: 24px;
+  }
+
+  #registrations tr td{
+    font-size: 18px;
+    text-align: center;
+    border: 2px solid black;
+    vertical-align: middle;
+    height: 48px;
+  }
